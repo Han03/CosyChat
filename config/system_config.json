@@ -56,16 +56,15 @@
   },
   "platform_keys": {
     "aliyun": {
-      "enabled": false,
-      "api_key": "",
+      "enabled": true,
+      "api_key": "sk-ws-H.EMXEDHX.Xa1P.MEYCIQCg64WGmfFkpJB8sAJiF5NeBJLXXhcg0oTNGI-ac6ux7gIhANDpB6awtK8BxEfo_AaG2Wt0l5FxSVuxInijrbG3hbht",
       "secret_key": "",
       "default_model": "qwen-plus",
-      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-      "auth_type": "api_key"
+      "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1"
     },
     "zhipu": {
-      "enabled": false,
-      "api_key": "",
+      "enabled": true,
+      "api_key": "3b2db9e5d77c4324a529f08c1eba11f8.KkDsNc4FxIxSQZI6",
       "secret_key": "",
       "default_model": "glm-4-flash",
       "base_url": "https://open.bigmodel.cn/api/paas/v4",
@@ -73,8 +72,8 @@
     },
     "baidu": {
       "enabled": false,
-      "api_key": "",
-      "secret_key": "",
+      "api_key": "ALTAKzpmaAE71CKkcMhdWmx2Ey",
+      "secret_key": "f163fb46b6df494884a86cecc1afafc6",
       "default_model": "ernie-4.0-turbo",
       "base_url": "https://aip.baidubce.com/rpc/2.0/ai_custom/v1/wenxinworkshop/chat/completions"
     },
@@ -85,9 +84,9 @@
       "default_model": "moonshot-v1-8k"
     },
     "volcengine": {
-      "enabled": false,
-      "api_key": "",
-      "secret_key": "",
+      "enabled": true,
+      "api_key": "ark-e4088d7d-3b13-418f-abd1-62ec62da0d3e-78e86",
+      "secret_key": "T1dGbE9HTmpNVFk0TW1RNU5HVTFNamc1TkRZMFpUUmtZVE5rTkRBd1pqSQ==",
       "default_model": "doubao-seed-2-1-pro-260628",
       "base_url": "https://ark.cn-beijing.volces.com/api/v3",
       "auth_type": "api_key"
@@ -111,8 +110,8 @@
       "default_model": "mixtral-8x7b-32768"
     },
     "openrouter": {
-      "enabled": false,
-      "api_key": "",
+      "enabled": true,
+      "api_key": "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",
       "secret_key": "",
       "default_model": "stealth/ox-alpha",
       "base_url": "https://openrouter.ai/api/v1",
@@ -128,15 +127,63 @@
   "model_capabilities": {
     "text_predict": [
       {
+        "id": "text_predict_openrouter_stealth/ox-alpha",
+        "platform_code": "openrouter",
+        "model_code": "ox-alpha",
+        "priority": 6,
+        "enabled": true,
+        "description": "OpenRouter的OxAlpha"
+      },
+      {
+        "id": "text_predict_aliyun_glm-5",
+        "platform_code": "aliyun",
+        "model_code": "glm-5",
+        "priority": 5,
+        "enabled": true,
+        "description": "阿里云GLM-5"
+      },
+      {
+        "id": "text_predict_aliyun",
+        "platform_code": "aliyun",
+        "model_code": "qwen-plus-0112",
+        "priority": 4,
+        "enabled": true,
+        "description": "阿里云Qwen-Plus文本预测"
+      },
+      {
+        "id": "text_predict_zhipu",
+        "platform_code": "zhipu",
+        "model_code": "glm-4-flash",
+        "priority": 3,
+        "enabled": true,
+        "description": "智谱GLM-4-Flash文本预测"
+      },
+      {
+        "id": "text_predict_volcengine_doubao-seed-2-0-pro",
+        "platform_code": "volcengine",
+        "model_code": "doubao-seed-2-0-pro",
+        "priority": 2,
+        "enabled": false,
+        "description": "volcengine doubao-seed-2-0-pro"
+      },
+      {
         "id": "text_predict_local_qwen",
         "platform_code": "local",
         "model_code": "qwen",
         "priority": 1,
-        "enabled": true,
+        "enabled": false,
         "description": "本地Qwen模型文本预测"
       }
     ],
     "text_to_speech": [
+      {
+        "id": "tts_aliyun",
+        "platform_code": "aliyun",
+        "model_code": "cosyvoice-v3",
+        "priority": 2,
+        "enabled": false,
+        "description": "阿里云语音合成"
+      },
       {
         "id": "tts_local_cosyvoice",
         "platform_code": "local",
@@ -147,6 +194,14 @@
       }
     ],
     "text_to_image": [
+      {
+        "id": "t2i_aliyun",
+        "platform_code": "aliyun",
+        "model_code": "stable-diffusion-xl",
+        "priority": 2,
+        "enabled": false,
+        "description": "阿里云文生图"
+      },
       {
         "id": "t2i_local_dreamlite",
         "platform_code": "local",
@@ -167,5 +222,27 @@
       }
     ]
   },
-  "call_point_models": {}
+  "call_point_models": {
+    "plan_executor": {
+      "capability_id": "text_predict_aliyun_glm-5"
+    },
+    "init_executor": {
+      "capability_id": "text_predict_aliyun"
+    },
+    "character_builder": {
+      "capability_id": "text_predict_aliyun"
+    },
+    "chapter_plot_generator": {
+      "capability_id": "text_predict_aliyun"
+    },
+    "draft_generator": {
+      "capability_id": "text_predict_aliyun"
+    },
+    "draft_polisher": {
+      "capability_id": "text_predict_aliyun"
+    },
+    "chapter_splitter": {
+      "capability_id": "text_predict_aliyun_glm-5"
+    }
+  }
 }
